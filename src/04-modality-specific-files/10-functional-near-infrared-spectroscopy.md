@@ -363,3 +363,5 @@ Example:
 [string]: https://www.w3schools.com/js/js_json_datatypes.asp
 
 [boolean]: https://www.w3schools.com/js/js_json_datatypes.asp
+
+[arrays]: https://www.w3schools.com/js/js_json_arrays.asp
