@@ -360,10 +360,6 @@ Example:
 
 [number]: https://www.w3schools.com/js/js_json_datatypes.asp
 
-[integer]: https://www.w3schools.com/js/js_json_datatypes.asp
-
 [string]: https://www.w3schools.com/js/js_json_datatypes.asp
 
-[arrays]: https://www.w3schools.com/js/js_json_arrays.asp
-
-[uri]: ../02-common-principles.md#uniform-resource-indicator
+[boolean]: https://www.w3schools.com/js/js_json_datatypes.asp
