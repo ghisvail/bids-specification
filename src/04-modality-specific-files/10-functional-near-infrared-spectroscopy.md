@@ -44,6 +44,8 @@ apply in this document:
 
 -   Detector - A photoelectric transducer, sometimes called a receiver.
 
+-   Optode - Refers to either a source or detector.
+
 -   Channel - A paired coupling of a source and a detector with one specific wavelength of light.
     It is common for a single Source-Detector pair to result in two or more channels
     with different wavelengths.
@@ -74,9 +76,10 @@ Closely spaced or short-separation source-detector pairs are often included in f
 obtain a measure of systemic, rather than neural, activity. These source-detector
 pairs are referred to as short channels. There is variation in how manufacturers
 implement these short channels, some use specialised sources or detectors,
-and the placement mechanisms vary. The exact specifications of the type of
-specialised short channel optodes is beyond the scope of the BIDS specification
-and this information can be stored within the SNIRF file (for example, in the `sourcePower` field).
+and the placement mechanisms vary.
+It is beyond the scope of the BIDS specification to define what constitutes a short channel,
+and detailed characteristics of channels may be stored within the SNIRF file
+(for example, in the `sourcePower` field).
 However, to improve searchability and ease of access for users, it is useful to
 know if short channels were included in the fNIRS measurements; this information
 is stored in the field `ShortChannelCount`.
@@ -96,7 +99,7 @@ Generic fields which SHOULD be present: For consistency between studies and inst
 | InstitutionName            | RECOMMENDED           | [string][]                           | The name of the institution in charge of the equipment that produced the composite instances.                                                                                                                                                                                                                                          |
 | InstitutionAddress         | RECOMMENDED           | [string][]                           | The address of the institution in charge of the equipment that produced the composite instances.                                                                                                                                                                                                                                       |
 | Manufacturer               | RECOMMENDED           | [string][]                           | Manufacturer of the fNIRS system (for example, `"NIRx"`, `"Artinis"`, `"Hitachi"`).                                                                                                                                                                                                                                                    |
-| ManufacturersModelName     | RECOMMENDED           | [string][]                           | Manufacturer's designation of the EEG system model (for example, `"NIRScout"`).                                                                                                                                                                                                                                                        |
+| ManufacturersModelName     | RECOMMENDED           | [string][]                           | Manufacturer's designation of the fNIRS system model (for example, `"NIRScout"`).                                                                                                                                                                                                                                                      |
 | SoftwareVersions           | RECOMMENDED           | [string][]                           | Manufacturer's designation of the acquisition software.                                                                                                                                                                                                                                                                                |
 | TaskDescription            | RECOMMENDED           | [string][]                           | Description of the task.                                                                                                                                                                                                                                                                                                               |
 | Instructions               | RECOMMENDED           | [string][]                           | Text of the instructions given to participants before the measurement. This is not only important for behavioral or cognitive tasks but also in resting state paradigms (for example, to distinguish between eyes open and eyes closed).                                                                                               |
@@ -177,12 +180,12 @@ Channels are a pairing of source and detector optodes with a specific wavelength
 Unlike in other modalities, not all pairings of optodes correspond to meaningful data
 and not all pairs have to be recorded or represented in the data.  Note that the source
 and detector names used in the channel specifications are specified in the `*_optodes.tsv`
-file below. The order of the required columns in the `*_channels.tsv` file MUST be listed as below.
+file below. The required columns in the `*_channels.tsv` file MUST be ordered as listed below.
 
-The BIDS specification supports several types of NIRS devices which output raw data in
-different forms. The type of measurement is specified in the type column. For example,
+The BIDS specification supports several types of fNIRS devices which output raw data in
+different forms. The type of measurement is specified in the `type` column. For example,
 when measurements are taken with a continuous wave (CW) device that saves the data
-as optical density, the type NIRSCWOPTICALDENSITY is used with the units unitless,
+as optical density, the `type` should be `NIRSCWOPTICALDENSITY` and the `units` should be `unitless`,
 this is equivalent to SNIRF data type dOD.
 
 The following columns MUST be present:
@@ -207,7 +210,8 @@ The following columns SHOULD be present:
 | wavelength_emission_actual | OPTIONAL              | [number][]    | Measured emission wavelength of light in nm. `n/a` for channels that do not contain raw NIRS signals (acceleration). This field is equivalent to `measurementList.wavelengthEmissionActual` in the SNIRF specification. |
 | short_channel              | OPTIONAL              | [boolean][]   | Is the channel designated as short. The total number of channels listed as short channels should be stored in `ShortChannelCount` in `*_fnirs.csv`.                                                                     |
 
-Restricted keyword list for the channel types.
+### Restricted keyword list for the channel types
+
 All fNIRS channels types MUST correspond to a [valid SNIRF data type](https://github.com/fNIRS/snirf/blob/master/snirf_specification.md#appendix).
 Additional channels that are recorded simultaneously with the fNIRS
 device and stored in the same data file should be included as well.
@@ -232,6 +236,8 @@ Note that upper-case is REQUIRED.
 | GYRO                        | Gyrometer channel, one channel for each orientation. An extra column `component` for the axis of the orientation MUST be added to the `_*channels.tsv` file (x, y or z).     |
 | MAGN                        | Magnetomenter channel, one channel for each orientation. An extra column `component` for the axis of the orientation MUST be added to the `_*channels.tsv` file (x, y or z). |
 | MISC                        | Miscellaneous                                                                                                                                                                |
+
+Example:
 
 ```Text
 Name         type                   source      detector      wavelength_nominal   units
@@ -280,7 +286,6 @@ The following columns MAY be present:
 | source_type     | OPTIONAL.                           | [string][]          | The type of source. Only to be used if the field `SourceType` in `*_nirs.json` is set to `mixed`.     |
 
 Example:
-
 ```Text
 name    type         x          y         z          template_x    template_y   template_z
 A1      source       -0.0707    0.0000    -0.0707    -0.07         0.00         0.07
