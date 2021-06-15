@@ -209,6 +209,8 @@ The following columns SHOULD be present:
 | description                | OPTIONAL              | [string][]    | Free-form text description of the channel, or other information of interest.                                                                                                                                            |
 | wavelength_emission_actual | OPTIONAL              | [number][]    | Measured emission wavelength of light in nm. `n/a` for channels that do not contain raw NIRS signals (acceleration). This field is equivalent to `measurementList.wavelengthEmissionActual` in the SNIRF specification. |
 | short_channel              | OPTIONAL              | [boolean][]   | Is the channel designated as short. The total number of channels listed as short channels should be stored in `ShortChannelCount` in `*_fnirs.csv`.                                                                     |
+| status                     | OPTIONAL              | [string][]    | Data quality observed on the channel (`good`, `bad`). A channel is considered `bad` if its data quality is compromised. Description of noise type SHOULD be provided in `status_description`.                           |
+| status_description         | OPTIONAL              | [string][]    | Free-form text description of noise or artifact affecting data quality on the channel. It is meant to explain why the channel was declared bad in `status`.                                                             |
 
 ### Restricted keyword list for the channel types
 
