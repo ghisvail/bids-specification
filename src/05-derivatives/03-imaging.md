@@ -139,7 +139,7 @@ Template:
 
 A binary (1 - inside, 0 - outside) mask in the space defined by the [`space` entity](../99-appendices/09-entities.md#space).
 If no transformation has taken place, the value of `space` SHOULD be set to `orig`.
-If the mask is an ROI mask derived from an atlas, then the [`label` entity](../99-appendices/09-entities.md#label)) SHOULD
+If the mask is an ROI mask derived from an atlas, then the [`label` entity](../99-appendices/09-entities.md#label) SHOULD
 be used to specify the masked structure
 (see [Common image-derived labels](#common-image-derived-labels)),
 and the `Atlas` metadata SHOULD be defined.
